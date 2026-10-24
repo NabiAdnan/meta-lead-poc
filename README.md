@@ -51,15 +51,14 @@ Live Lead Dashboard
 
 ### How It Works
 
-1. The project showcases the validity of the idea behind real-time delivery of leads.
-2. Meta's webhook gives notifications and the backend gets the data regarding the precise leads via Graph API.
-3. It is necessary to have valid Meta credentials and configured webhook to access the Page.
-4. Moreover, it is important to establish intercommunication between the backend and the mobile app via the established network.
-5. Leads are viewed via in-memory Map, thus being lost when the backend is restarted.
-6. It is to important to note that the current app only helps to avoid duplicates during the server run.
-7. Leads sent while the Socket.IO connection is active will be available to the mobile app, however, leads obtained via GET /leads will not automatically appear on the app as it launches.
-8. The test endpoint was created for the purpose of development and cannot be used for real operations.
-9. The real version will require permanent storage, more complicated authorization, reliable verification of webhook, CORS setup, and high-quality error management.
+1. A test lead is submitted through Meta's Lead Ads Testing Tool.
+2. Meta sends a webhook notification to the backend's `POST /webhook` endpoint.
+3. The backend acknowledges the webhook and processes the notification.
+4. The backend extracts the lead ID and requests the lead details from the Meta Graph API.
+5. The retrieved lead is stored in an in-memory `Map`.
+6. The backend emits a Socket.IO event named `new_lead`.
+7. The mobile application receives the event and updates its React state.
+8. The new lead appears in the dashboard without requiring a manual refresh.
 
 ## Project Structure
 
@@ -209,18 +208,17 @@ The backend also provides these endpoints:
 | POST | `/webhook` | Receives webhook notifications |
 | GET | `/leads` | Returns leads held in memory |
 
-
 ## Assumptions and Limitations
 
-- The project is a proof of concept demonstrating real-time lead delivery.
-- Meta's webhook provides a notification; the backend retrieves the complete lead details separately through the Graph API.
-- Valid Meta credentials, webhook configuration, Page access, and appropriate permissions are required.
-- The backend and mobile application must be able to communicate over the configured network.
-- Leads are stored in an in-memory `Map`; they are lost when the backend restarts.
-- Duplicate prevention is limited to the current server runtime.
-- The mobile application receives leads emitted while its Socket.IO connection is active. The current implementation does not automatically load previously stored leads from `GET /leads` when the app starts.
-- The test endpoint is for development and is not intended for public production use.
-- Production deployment would require persistent storage, stronger authentication and authorization, secure webhook validation, appropriate CORS configuration, and more robust error handling.
+- This project proves that lead delivery occurs in real-time.
+- The webhook generated will signal updates to the backend, which can gather the full lead information using the Graph API instead.
+- Meta credentials, Webhook setup, Page access, and permissions are all obligatory.
+- Both backend and mobile app should be communicating over the specified network.
+- All leads are kept in the memory Map and lost when backend restarts.
+- The duplicate suppression works only for server session.
+- Mobile application gets leads while the Socket.IO connection is operating. The implementation does not fetch previously fetched leads with `GET /leads` when the app is launched.
+- Test endpoint is for development purposes, and it does not apply to production.
+- For production deployment, persistent storage, better authentication and authorization, validated webhooks, CORS configuration and better error handling will be required.
 
 ## Future Improvements
 
@@ -233,7 +231,9 @@ The backend also provides these endpoints:
 
 ## Demo Videos
 
-- **Live application demonstration:** https://drive.google.com/file/d/14h58fGCNxeBYeoLHnxNHd2DVlP20g5DI/view?usp=sharing
+- **Live application demonstration:** https://drive.google.com/file/d/14h58fGCNxeBYeoLHnxNHd2DVlP20g5DI/view?usp=drive_link
 - **Code and architecture walkthrough:** https://drive.google.com/file/d/1j2ablYeseZKtPSafeQtQ3rw_32n18RYk/view?usp=sharing
 
+## Author
 
+Developed as a Meta Lead Ads integration proof of concept.
