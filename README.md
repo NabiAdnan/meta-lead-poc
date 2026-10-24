@@ -234,6 +234,3 @@ The backend also provides these endpoints:
 - **Live application demonstration:** https://drive.google.com/file/d/14h58fGCNxeBYeoLHnxNHd2DVlP20g5DI/view?usp=drive_link
 - **Code and architecture walkthrough:** https://drive.google.com/file/d/1j2ablYeseZKtPSafeQtQ3rw_32n18RYk/view?usp=sharing
 
-## Author
-
-Developed as a Meta Lead Ads integration proof of concept.
