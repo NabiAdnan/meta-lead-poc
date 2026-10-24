@@ -1,9 +1,9 @@
 import { io } from 'socket.io-client';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   View,
@@ -18,7 +18,7 @@ type Lead = {
   }[];
 };
 
-//const API_URL = 'http://YOUR_COMPUTER_IP:5000';
+
 
 export default function HomeScreen() {
   const [leads, setLeads] = useState<Lead[]>([]);

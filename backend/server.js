@@ -99,23 +99,7 @@ app.get("/leads", (req, res) => {
   res.json(Array.from(leads.values()).reverse());
 });
 
-// Test endpoint for checking mobile delivery
-app.post("/test-lead", (req, res) => {
-  const lead = {
-    id: `test-${Date.now()}`,
-    created_time: new Date().toISOString(),
-    field_data: [
-      { name: "full_name", values: ["Test Lead"] },
-      { name: "email", values: ["test@example.com"] },
-      { name: "phone_number", values: ["+1234567890"] },
-    ],
-  };
 
-  leads.set(lead.id, lead);
-  io.emit("new_lead", lead);
-
-  res.json({ message: "Test lead sent", lead });
-});
 
 io.on("connection", (socket) => {
   console.log("Mobile client connected:", socket.id);
