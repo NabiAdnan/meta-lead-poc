@@ -51,14 +51,15 @@ Live Lead Dashboard
 
 ### How It Works
 
-1. A test lead is submitted through Meta's Lead Ads Testing Tool.
-2. Meta sends a webhook notification to the backend's `POST /webhook` endpoint.
-3. The backend acknowledges the webhook and processes the notification.
-4. The backend extracts the lead ID and requests the lead details from the Meta Graph API.
-5. The retrieved lead is stored in an in-memory `Map`.
-6. The backend emits a Socket.IO event named `new_lead`.
-7. The mobile application receives the event and updates its React state.
-8. The new lead appears in the dashboard without requiring a manual refresh.
+1. The project showcases the validity of the idea behind real-time delivery of leads.
+2. Meta's webhook gives notifications and the backend gets the data regarding the precise leads via Graph API.
+3. It is necessary to have valid Meta credentials and configured webhook to access the Page.
+4. Moreover, it is important to establish intercommunication between the backend and the mobile app via the established network.
+5. Leads are viewed via in-memory Map, thus being lost when the backend is restarted.
+6. It is to important to note that the current app only helps to avoid duplicates during the server run.
+7. Leads sent while the Socket.IO connection is active will be available to the mobile app, however, leads obtained via GET /leads will not automatically appear on the app as it launches.
+8. The test endpoint was created for the purpose of development and cannot be used for real operations.
+9. The real version will require permanent storage, more complicated authorization, reliable verification of webhook, CORS setup, and high-quality error management.
 
 ## Project Structure
 
